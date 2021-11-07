@@ -1,0 +1,27 @@
+* {
+	-webkit-box-sizing : border-box;
+	   -moz-box-sizing : border-box;
+	    -ms-box-sizing : border-box;
+	     -o-box-sizing : border-box;
+			box-sizing : border-box;
+	margin : 0;
+	padding : 0;
+}
+.table { display : table; }
+.cell  { display : table-cell; }
+.row   { display : table-row; }
+.block { display : block; }
+.inlineBlock { display : inline-block; }
+.inline { display : inline; }
+
+
+
+
+.myblue  { background-color :#009ADD; }
+.pink  { background-color :#EA0052; }
+.purple{ background-color :#630052; }
+.lime { background-color : lime;}
+.gold { background-color : gold;}
+.blue { background-color : darkcyan;}
+.tom { background-color : #847977; }
+.matrixGreen { background-color : #39FF14; }

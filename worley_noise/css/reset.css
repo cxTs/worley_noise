@@ -1,0 +1,136 @@
+/*
+RESET
+*/
+/*
+* www.KNACSS.com V2.8b (2013-09) @author: Raphael Goetter, Alsacreations
+* Licence CC-BY http://creativecommons.org/licenses/by/3.0/fr/ 
+ONLY SOFT RESET USED HERE
+*/
+
+* {
+    -ms-box-sizing : border-box;
+    -o-box-sizing : border-box;
+    box-sizing : border-box;
+    margin : 0;
+    padding : 0;
+}
+html,
+body,
+textarea,
+figure,
+label,
+input,
+textarea {
+	margin: 0;
+	padding: 0;
+}
+ul,
+ol {
+	padding : 0;
+}
+ul {
+	list-style: none;
+}
+a { 
+	text-decoration : none;
+}
+code, 
+pre,
+samp,
+kbd {
+	white-space: pre-wrap;
+	font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+	line-height: 1.5em;
+}
+code, kbd, mark {
+	border-radius: 2px;
+}
+em {
+	font-style: italic;
+}
+strong {
+	font-weight: bold;
+}
+i,
+b {
+	font-style: normal;
+	font-weight: normal;
+}
+kbd {
+	padding: 0 2px;
+	border: 1px solid #999;
+}
+code {
+	padding: 2px 4px;
+	background: rgba(0,0,0,.04);
+	color: #b11; 
+}
+mark {
+	padding: 2px 4px;
+	background: #ff0;
+}
+sup,
+sub {
+	vertical-align: 0;
+	position: relative;
+}
+sup {
+	bottom: 1px;
+}
+sub {
+	top: .5px;
+}
+/* avoid top margins on first content element */
+p:first-child,
+ul:first-child,
+ol:first-child,
+dl:first-child,
+blockquote:first-child,
+pre:first-child,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+	margin-top: 0;
+}
+/* avoid margins on nested elements */
+li ul,
+li ol {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+/* max values */
+img, table, td, blockquote, code, pre, textarea, input, video {
+	max-width: 100%;
+}
+textarea { width : 100%; }
+/* pictures */
+img {
+	height: auto;
+	vertical-align: middle;
+}
+/* Gmap3 bug fix on images */
+.gm-style img,
+.gmnoscreen img,
+.gmnoprint img {max-width: none !important;}
+
+a img { border: 0; }
+/* scripts */
+body > script {display: none !important;}
+/* skip-links */
+.skip-links {
+	position: absolute;
+}
+.skip-links a {
+	position: absolute;
+	left: -7000px;
+	padding: 0.5em;
+	background: #000;
+	color:#fff;
+	text-decoration: none;
+}
+.skip-links a:focus {
+	position: static;
+}
