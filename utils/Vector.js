@@ -1,16 +1,3 @@
-/**
-* @description : class Vector. The base class of the utils suite
-*
-* @author cxts  <couchaux.thomas@gmail.com>
-* @github https://github.com/cxTs
-* @date 20/01/2020 (last update and corrections on 09/03/2021)
-* @required NONE
-* @param {NUMBER} x : value of x position
-* @param {NUMBER} y : value of y position
-* @param {NUMBER} z : value of z position
-* @return {VOID}
-*
-**/
 class Vector {
     x;
     y;
@@ -41,8 +28,8 @@ class Vector {
     }
 // return a normalized vector created with a vector "(0,0)" and an angle from the first radius of a trigo circle
     static fromAngle(angle) {
-        let x = Math.cos(angle);
-        let y = Math.sin(angle);
+        let x = Math.cos(angle) / 1;
+        let y = Math.sin(angle) / 1;
         return new Vector(x, y);
     }
 
@@ -77,24 +64,6 @@ class Vector {
         ab.mult(av.dot(ab));
         let point = Vector.add(a, ab);
         return point;
-    }
-
-    /**
-    * @description : return a random integer in range [min, max]
-    *
-    * @param {NUMBER} min : minimum value of the range
-    * @param {NUMBER} min : maximum value of the range
-    * @return {NUMBER} : a random integer
-    *
-    **/
-    static getRandom(min, max) {
-        if(max == null) {
-    		max = min;
-    		min = 0;
-    	}
-            min = Math.ceil(min);
-            max = max | 0; // binary OR operator is faster than Math.floor() function
-            return ((Math.random() * (max - min + 1)) | 0) + min;
     }
 
 }
@@ -135,16 +104,9 @@ Vector.prototype.limit = function(max) {
 
 // move vector compared to the x and y passed in args
 Vector.prototype.move = function(x, y, z) {
-    this.x = x || this.x;
-    this.y = y || this.y;
-    this.z = z || this.z;
-}
-
-// randomly move vector in [min, max] range
-Vector.prototype.randomMove = function(min, max) {
-    this.x = this.x + Vector.getRandom(min,max);
-    this.y = this.y + Vector.getRandom(min,max);
-    this.z = this.z + Vector.getRandom(min,max);
+    this.x = (x != null) ? x : this.x;
+    this.y = (y != null) ? y : this.y;
+    this.z = (z != null) ? z : this.z;
 }
 
 // rotate the vector around point (0, 0)
@@ -280,23 +242,26 @@ Vector.prototype.setMag = function(value) {
 }
 
 // draw the vector on canvas as a circle
-Vector.prototype.display = function(ctx, size, fill = true, stroke = false, color = null) {
+Vector.prototype.display = function(ctx, size, fill, stroke, color) {
+    let _fill = (fill == false) ? fill : true;
+    let _stroke = (stroke) ? stroke : false;
+    let _color = color || null;
     ctx.beginPath();
     ctx.arc(this.x, this.y, size, 0, Math.PI * 2);
-    if(color != null) {
+    if(_color != null) {
         ctx.save();
-        ctx.fillStyle = color;
-        ctx.strokeStyle = color;
+        ctx.fillStyle = _color;
+        ctx.strokeStyle = _color;
     }
-    if(fill) {
+    if(_fill) {
         ctx.fill();
     }
-    if(stroke) {
+    if(_stroke) {
         ctx.stroke();
     }
     ctx.closePath();
 
-    if(color != null) ctx.restore();
+    if(_color != null) ctx.restore();
 
 }
 

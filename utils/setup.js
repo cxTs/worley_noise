@@ -177,3 +177,13 @@ function slider(min, max, step, id) {
         return this.currentValue;
     }
 }
+
+
+// set a round target that follow the mouse on move
+var __mouseTarget = new Vector(0, 0);
+document.onmousemove = function(e) {
+    __mouseTarget.pos.move(e.clientX, e.clientY);
+}
+function displayTarget() {
+    __mouseTarget.display(ctx, 8, true, false, "#F0F");
+}

@@ -1,56 +1,36 @@
-/**
-* @description : Arrow class. Draw an arrow pointing to the velocity direction of the object in which
-*                you create it. Geometry of the arrow change with the value of the velocity
-*                after creation of the arrow object, make sure that each update of your moving object
-*                is transmitted to Arrow.update, and then display it with Arrow.display
-*
-* @author cxts  <couchaux.thomas@gmail.com>
-* @github https://github.com/cxTs
-* @date 23/09/2020
-* @required Vector.js, Draw.js,
-* @param {OBJECT} location : Vector object that old the location of the moving object
-* @param {OBJECT} velocity : Vector object that old the velocity of the moving object
-* @param {NUMBER} size : Size of the arrow
-* @return {VOID} :  Draw an arrow pointing to the direction where the object moves
-*
-**/
-function Arrow(location, velocity, size) {
+function Arrow(pos, vel, size) {
     // the center or zero reference, on which arrow is based
-    this.center = location;
+    this.center = pos;
     // the velocity of the vehicle
-    this.vel = velocity;
+    this.vel = vel;
     // the apex of the arrow which give the direction
     this.arrowhead = new Vector();
     this.size = size;
     // the angle of the velocity vector depeding of the cos axcis of the trigo circle
     this.velAngle = 0;
     // the 2 "wings" of the arrow
-    this.w1;
-    this.w2;
+    this.w1 = new Vector();
+    this.w2 = new Vector();
     // the angle to sum with the velocity angle to give the arrow its shape
     this.angleForArrowShape = Math.PI * .5;//Math.PI * 1.2;
 
 
     // args passed to allow the update of the arrow direction
-    Arrow.prototype.update = function(location, velocity) {
+    Arrow.prototype.update = function(pos, vel) {
         // change the shape of the arrow depending on the velocity magnitude
-        let factor = velocity.mag() / 10;
-
+        let factor = vel.mag() / 500;
         // avoiding unwanted arrow shape
-        factor = (factor > 1.3) ? 1.3 : factor;
+        factor = (factor > 1) ? 1 : factor;
+        
 
-        // TEST for constant flying movement
-        //this.angleForArrowShape += factor;
-        // TEST END
-
-        this.center = location;
-        this.vel = velocity;
+        this.center = pos;
+        this.vel = vel;
 
         // reset the arrowhead to (0,0) avoiding its constant growing
         this.arrowhead.mult(0);
 
-        // getting velocity angle to apply it to arrowhead
-        this.velAngle = this.vel.angle();
+
+
         this.arrowhead.add(this.vel);
         this.arrowhead.norm();
         this.arrowhead.mult(this.size);
@@ -58,19 +38,18 @@ function Arrow(location, velocity, size) {
         // setting arrowhead to be visible on the canvas and displaying it int the right place
         this.arrowhead.add(this.center);
 
-        // creating wings of the arrow from the velocity angle
-        this.w1 = Vector.fromAngle(this.velAngle);
-        this.w2 = Vector.fromAngle(-this.velAngle);
+        // getting velocity angle to apply it to arrowhead
+        this.velAngle = this.vel.angleFromCosAxcis();
 
-        // applying rotation to put the wings in the right place
-        this.w1.rotate(this.velAngle - (this.angleForArrowShape + factor));
-        this.w2.rotate(this.velAngle + (this.angleForArrowShape  + factor));
-
-        // setting wings to be visible on the canvas and displaying it at the right place
-        this.w1.mult(this.size);
-        this.w1.add(this.center);
-        this.w2.mult(this.size);
-        this.w2.add(this.center);
+        // reset w1 position
+        this.w1.mult(0);
+        // making w1 position the same as arrowhead
+        this.w1.add(this.arrowhead);
+        // then rotate w1 around the raaow center from its position
+        this.w1.rotateAround(this.center, (this.velAngle + (this.angleForArrowShape + factor)));
+        this.w2.mult(0);
+        this.w2.add(this.arrowhead);
+        this.w2.rotateAround(this.center, (this.velAngle + (-this.angleForArrowShape - factor)));
     }
 
     // first update at the init of the arrow
@@ -81,6 +60,13 @@ function Arrow(location, velocity, size) {
         this.arrowhead.arrowFrom(ctx, this.w2);
         this.w1.arrowFrom(ctx, this.center);
         this.w2.arrowFrom(ctx, this.center);
+        // DEBUG:
+        // this.arrowhead.display(ctx, 5, true, false, "#F00");
+        // this.w1.display(ctx, 5, true, false, "#F0F");
+        // this.w2.display(ctx, 5, true, false, "#0F0");
+        // this.center.display(ctx, 5);
+        // END DEBUG
+
     }
 
     Arrow.prototype.displayColored = function(ctx, color) {
