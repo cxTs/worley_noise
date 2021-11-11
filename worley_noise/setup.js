@@ -25,7 +25,7 @@ const yRatio = scale * 1;
 scene.width = document.getElementsByTagName("body")[0].clientWidth * xRatio;
 scene.height = document.getElementsByTagName("body")[0].clientHeight * yRatio;
 const ctx = scene.getContext('2d');
-//canvasSize(400, 400);
+canvasSize(1200, 600);
 const width = scene.clientWidth;
 const height = scene.clientHeight;
 

@@ -17,7 +17,7 @@ let data = myImgData.data;
 
 // init random points that will permit the calculus of worley noise
 let points = [];
-let nbPoints = 9;
+let nbPoints = 30;
 for(let i = 0; i < nbPoints; i ++) {
     points.push(new Vector(getRandom(0, width), getRandom(0, height)));
 }
@@ -44,7 +44,7 @@ function worleyNoise(imgData, points) {
              */
             let n = 0;
             distances.sort(function(a, b) {return a - b;});
-            let noise = map(distances[n], 0, width / 5, 0, 255);
+            let noise = map(distances[n], 0, width / 8, 0, 255);
             let index = (x + (y * width)) * 4;
 
             // noise = 255 - noise; // invert noise // 255 is full opacity
