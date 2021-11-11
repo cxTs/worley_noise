@@ -100,6 +100,7 @@ Vector.prototype.limit = function(max) {
         this.normalize();
         this.mult(max);
     }
+    return this;
 }
 
 // move vector compared to the x and y passed in args
