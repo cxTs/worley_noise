@@ -152,6 +152,7 @@ Vector.prototype.mult = function(factor) {
     this.x *= factor;
     this.y *= factor;
     this.z *= factor;
+    return this;
 }
 
 // divide a vector by a factor ( to scale the vector)
