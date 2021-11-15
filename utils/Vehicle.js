@@ -1,17 +1,3 @@
-/**
-* @description : class Vehicle.
-*
-* @author cxts  <couchaux.thomas@gmail.com>
-* @github https://github.com/cxTs
-* @date 21/07/2020
-* @required Vector.js
-* @param {NUMBER} x : value of x position
-* @param {NUMBER} y : value of y position
-* @param {NUMBER} size : size of the vehicule (corresponding to the diameter of a circle surrounding the vehicle)
-* @return {OBJECT} a Vehicle object
-*
-**/
-
 class Vehicle {
     location;
     velocity;
@@ -71,7 +57,6 @@ Vehicle.prototype.showVelocity = function(ctx) {
     ctx.restore();
 }
 
-// change the color regarding the value of velocity
 Vehicle.prototype.changeColor = function() {
     if(this.velocity.x > 0 && this.velocity.y > 0)
         this.color = "rgba(200, 127, 127, .5)";
@@ -100,17 +85,9 @@ Vehicle.prototype.showZone = function(ctx, zoneSize, color) {
 
 // FORCES
 
-/**
-* @description : update (acceleration algorithm)
-*
-* @param {NUMBER} maxspeed [optional]: maximum speed you fixed for the moving object
-* @return {VOID}
-*
-**/
-Vehicle.prototype.update = function(maxSpeed) {
+Vehicle.prototype.update = function(maxSpeed = null) {
     this.velocity.add(this.acceleration);
-    let m = maxSpeed || null;
-    this.limitSpeed(m);
+    this.limitSpeed(maxSpeed);
     this.location.add(this.velocity);
     // avoid constant accumulation of acceleration
     this.acceleration.mult(0);

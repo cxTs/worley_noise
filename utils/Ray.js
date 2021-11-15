@@ -1,21 +1,3 @@
-/**
-* @description : description
-*
-* @author cxts  <couchaux.thomas@gmail.com>
-* @github https://github.com/cxTs
-* @date DATE
-* @required REQUIRED CLASSES
-* @param {OBJECT} origin : is an object Vector representing the start of the ray, i.e the center of the light object
-* @param {NUMBER} length : is indicative, for the purpose of the calculation of the real length based on Al-Kashi theorem.
-*                          it's a kind of "base" radius of the light with a 0 angle and a given length,
-*                          all the rays created will turned// around their origin point compared to this start radius.
-*
-* @param {NUMBER}} angle : make possible the orientation of the ray compared to its center and the indicative initial length
-* @param {STRING} color : is the color off the ray in CSS format, default value on "#FFFFFF33"
-* @param {NUMBER} linewidth : the thickness of the ray , default value on 1;
-* @return {VOID}
-*
-**/
 class Ray {
     origin;
     length;
@@ -27,13 +9,23 @@ class Ray {
     checkedPt = [];
     closestPt = null;
 
-    constructor(origin, length, angle, color, lineWidth) {
+    // args :
+    // origin is the start of the ray, i.e the center of the light object
+
+    // length is indicative, for the purpose of the calculation of the real length based on Al-Kashi theorem.
+    // it's a kind of "base" radius of the light with a 0 angle and a given length, all the rays created will turned
+    // around their origin point compared to this start radius.
+
+    // angle make possible the orientation of the ray compared to its center and the indicative initial length
+    // color is the color off the ray, default value on "#FFFFFF33"
+    // linewidth the thickness of the ray , default value on 1;
+    constructor(origin, length, angle, color = "#FFFFFF06", lineWidth = 1 ) {
         this.origin = origin;
         this.length = length;
         this.angle = angle;
         this.end = this.findEnd();
-        this.color = color || "#FFFFFF06";
-        this.lineWidth = lineWidth || 1;
+        this.color = color;
+        this.lineWidth = lineWidth;
     }
 }
 
@@ -66,7 +58,7 @@ Ray.prototype.move = function(newOrigin) {
 }
 
 
-// THE VERY FUNNY PARTS !!
+// THE VERY FUN PARTS !!
 // https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection
 
 // check for the intersection of a ray and the walls of the array passed in argument

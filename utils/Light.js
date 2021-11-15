@@ -1,18 +1,3 @@
-/**
-* @description : Light class. Simulate a light with ray of light from Ray.js class
-*                Light source at the center is managed by an Vector object
-* @author cxts  <couchaux.thomas@gmail.com>
-* @github https://github.com/cxTs
-* @date 24/01/2020
-* @required Vector.js, Ray.js
-* @param {NUMBER} x : value of x position (light source)
-* @param {NUMBER} y : value of y position (light source)
-* @param {NUMBER} nbRay : amount of ray that light gonna throw
-* @param {NUMBER} radius : radius has to be init for the first ray calculus
-* @param {STRING} color : css formated color
-* @return {VOID}
-*
-**/
 class Light {
     context = document.getElementById("canvas").getContext('2d');
     center;
@@ -24,7 +9,7 @@ class Light {
     arcSize = Math.PI * 2;
 
     // args : x et y for the center position (light source) et nbRay for the number of ray that light gonna throw
-    //  and then the color of the light (the rays)
+    // radius has to be init for the first ray calculus and then the color of the light (the rays)
     constructor(x, y, nbRay, radius, color) {
         this.center = new Vector(x, y);
         this.nbRay = nbRay;

@@ -18,10 +18,10 @@ function Arrow(pos, vel, size) {
     // args passed to allow the update of the arrow direction
     Arrow.prototype.update = function(pos, vel) {
         // change the shape of the arrow depending on the velocity magnitude
-        let factor = vel.mag() / 500;
+        let factor = vel.mag() / 20;
         // avoiding unwanted arrow shape
         factor = (factor > 1) ? 1 : factor;
-        
+
 
         this.center = pos;
         this.vel = vel;
@@ -55,29 +55,44 @@ function Arrow(pos, vel, size) {
     // first update at the init of the arrow
     this.update(this.center, this.vel);
 
-    Arrow.prototype.display = function(ctx) {
-        this.arrowhead.arrowFrom(ctx, this.w1);
-        this.arrowhead.arrowFrom(ctx, this.w2);
-        this.w1.arrowFrom(ctx, this.center);
-        this.w2.arrowFrom(ctx, this.center);
-        // DEBUG:
-        // this.arrowhead.display(ctx, 5, true, false, "#F00");
-        // this.w1.display(ctx, 5, true, false, "#F0F");
-        // this.w2.display(ctx, 5, true, false, "#0F0");
-        // this.center.display(ctx, 5);
-        // END DEBUG
 
-    }
+    // Arrow.prototype.display = function(ctx, filled, stroked, color) {
+    //     this.arrowhead.arrowFrom(ctx, this.w1);
+    //     this.arrowhead.arrowFrom(ctx, this.w2);
+    //     this.w1.arrowFrom(ctx, this.center);
+    //     this.w2.arrowFrom(ctx, this.center);
+    //     // DEBUG:
+    //     // this.arrowhead.display(ctx, 5, true, false, "#F00");
+    //     // this.w1.display(ctx, 5, true, false, "#F0F");
+    //     // this.w2.display(ctx, 5, true, false, "#0F0");
+    //     // this.center.display(ctx, 5);
+    //     // END DEBUG
+    //
+    // }
 
-    Arrow.prototype.displayColored = function(ctx, color) {
-        ctx.save();
+    Arrow.prototype.display = function(ctx, fill, stroke, color) {
+        let _fill = (fill == false) ? fill : true;
+        let _stroke = (stroke == true) ? stroke : false;
+        let _color = color || null;
         ctx.beginPath();
         ctx.moveTo(this.arrowhead.x, this.arrowhead.y);
         ctx.lineTo(this.w1.x, this.w1.y);
         ctx.lineTo(this.center.x, this.center.y);
         ctx.lineTo(this.w2.x, this.w2.y);
-        ctx.fillStyle = color || "#000";
-        ctx.fill();
-        ctx.restore();
+        if(_color != null) {
+            ctx.save();
+            ctx.fillStyle = _color;
+            ctx.strokeStyle = _color;
+        }
+        if(_fill) {
+            ctx.fill();
+        }
+        if(_stroke) {
+            ctx.stroke();
+        }
+        ctx.closePath();
+
+        if(_color != null) ctx.restore();
+
     }
 }

@@ -69,6 +69,9 @@ class Vector {
 }
 
 // PROTO //
+Vector.prototype.copy = function() {
+    return new Vector(this.x, this.y, this.z);
+}
 // verify the equality of location between 2 vectors
 Vector.prototype.equal = function(vector) {
     if(this.x == vector.x && this.y == vector.y && this.z == vector.z)
@@ -130,12 +133,14 @@ Vector.prototype.add = function(vector) {
     this.x += vector.x;
     this.y += vector.y;
     this.z += vector.z;
+    return this;
 }
 
 Vector.prototype.sub = function(vector) {
     this.x -= vector.x;
     this.y -= vector.y;
     this.z -= vector.z;
+    return this;
 }
 
 // multiply a vector by a vector and give a new Vector object
@@ -246,7 +251,7 @@ Vector.prototype.setMag = function(value) {
 // draw the vector on canvas as a circle
 Vector.prototype.display = function(ctx, size, fill, stroke, color) {
     let _fill = (fill == false) ? fill : true;
-    let _stroke = (stroke) ? stroke : false;
+    let _stroke = (stroke == true) ? stroke : false;
     let _color = color || null;
     ctx.beginPath();
     ctx.arc(this.x, this.y, size, 0, Math.PI * 2);

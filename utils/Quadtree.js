@@ -1,27 +1,6 @@
-/**
-* @description : optimisation of the communication and relation between object that have to be aware of their
-*                neighbors. Ex: if 100 cells are on screen and have to maintain a distance from another cells
-*                quadtree avoid a cell to check cell at the other side of the canvas and not in its neighbors
-*                it's save a lot of memery consumming
-*
-* @author cxts  <couchaux.thomas@gmail.com>
-* @github https://github.com/cxTs
-* @date 23/09/2020
-* @required Vector.js
-* @return {OBJECT} a quadtree object
-*
-**/
-
 // POINT CLASS PART
 
-/**
-* @description : class Point. point are the location vector of whatever have to insert in the quadtree
-*
-* @param {NUMBER} x : the x value of the loc vector of the object to "check"
-* @param {NUMBER} y : the y value of the loc vector of the object to "check"
-* @return {OBJECT} : a Vector object that have the same coordinate as the loc Vector of the object to "check"
-*
-**/
+// point are the location vector of whatever have to insert in the quadtree
 class Point {
     location;
     constructor(x, y) {
@@ -33,16 +12,7 @@ class Point {
 
 // RECTANGLE CLASS PART
 
-/**
-* @description : class Rectangle, rectangle is the base tile of the quadtree
-*
-* @param {NUMBER} x : x pos of the origin of the first rectangle of quadtree
-* @param {NUMBER} y : y pos of the origin of the first rectangle of quadtree
-* @param {NUMBER} w : width of the rectangle
-* @param {NUMBER} h : height of the rectangle
-* @return {OBJECT} : a rectangle (i.e a subdivision of the quadtree)
-*
-**/
+// rectangle is the base tile of the quadtree
 class Rectangle {
     x;
     y;
@@ -56,7 +26,7 @@ class Rectangle {
     }
 }
 
-// RECTANGLE PROTO //
+// RECTANGEL PROTO //
 
 // return true if the given point is contained by the Rectangle
 Rectangle.prototype.contains = function(point) {
@@ -93,22 +63,18 @@ Rectangle.prototype.display = function(ctx, color = "#0F0") {
     ctx.restore();
 }
 
-/**
-* @description : QUADTREE CLASS PART
-*
-* @param {OBJECT} rectangle : Rectangle object (see precedent class in this file).
-*                             rectangle is often the whole canvas scene
-* @param {Number} n : n is the maximum object holded by a division of the quadtree without subdivising itself
-* @param {TYPE} NAME :
-* @return {VOID}
-*
-**/
+
+
+
+// QUADTREE CLASS PART
+
 class Quadtree {
     boundary;
     capacity;
     points;
     divided;
-
+    // rectangle is often the whole canvas scene
+    // n is the maximum object holded by a division of the quadtree without subdivising itself
     constructor(rectangle, n) {
         this.boundary = rectangle;
         this.capacity = n;

@@ -32,12 +32,12 @@ const height = scene.clientHeight;
 // CANVAS SETUP END
 
 /**
-* @description : clear the canvas from  (x,y) to (width, height) and cover it with an alpha if alpha given
+* @description clear the canvas from  (x,y) to (width, height) and cover it with an alpha if alpha given
 *
 * @param {NUMBER} x [optional]: give the "clear area" starting point value on x axcis, default 0
 * @param {NUMBER} y [optional]: give the "clear area" starting point value on y axcis, default 0
 * @param {NUMBER} alpha [optional]: value in range [0,1], default 0, will erase canvas on each call
-* @return {VOID}
+* @return {RETURNED TYPE}
 *
 **/
 function clear(x, y, alpha) {
@@ -59,7 +59,7 @@ function clear(x, y, alpha) {
 }
 
 /**
-* @description : draw an orthonormal on the canvas with translation to the center, for dev purposes
+* @description draw an orthonormal on the canvas with translation to the center, for dev purposes
 *
 * @param {OBJECT} ctx : context object from the HTMLCanvasElementPrototype
 * @return {VOID}
@@ -76,7 +76,7 @@ function orthonormal(ctx) {
 }
 
 /**
-* @description : draw an orthonormal on the canvas, for dev purposes
+* @description draw an orthonormal on the canvas, for dev purposes
 *
 * @param {OBJECT} ctx : context object from the HTMLCanvasElementPrototype
 * @return {VOID}
@@ -91,14 +91,7 @@ function orthonormalWithoutTranslation(ctx) {
     Draw.line(ctx, w, e);
 }
 
-/**
-* @description : reset the size of canvas element
-*
-* @param {NUMBER} width : desired width (in px)
-* @param {NUMBER} height : desired height (in px)
-* @return {VOID}
-*
-**/
+
 function canvasSize(width, height) {
     if(width) {
         ctx.canvas.width = width;
@@ -108,9 +101,7 @@ function canvasSize(width, height) {
 
 
 /**
-* @description : Stop or play animation on pressing "p" or space key
-*                you have to surround `window.resquestAnimationFrame(draw)` in script draw function
-*                with  an if(!__paused) statement
+* @description to stop animation and restart on pressing "p" or space key
 *
 * @param {EVENT} event : event triggered by user on keyboard
 * @return {VOID}
@@ -119,21 +110,20 @@ function canvasSize(width, height) {
 let __paused = false;
 document.onkeydown = function(event) {
     if(event.key == "p" || event.key == " ") {
-        if(__paused) {
-            console.log(" ▶️ "," Animation play");
-        }
-        // invert the __pause value
-        __paused = !__paused;
+        __paused = !__paused; // invert the __paused value
         if(!__paused) {
             window.requestAnimationFrame(draw);
-        } else {
-            console.log(" ⏸️ "," Animation paused");
+        }
+        if(__paused) {
+            console.log("Animation paused");
         }
     }
+
 }
 
 
-// RANGES SETTING
+
+// SLIDERS SETTING
 
 var slideNum = 0; // handle multiple sliders creation
 /**
@@ -177,7 +167,6 @@ function slider(min, max, step, id) {
         return this.currentValue;
     }
 }
-
 
 // set a round target that follow the mouse on move
 var __mouseTarget = new Vector(0, 0);
